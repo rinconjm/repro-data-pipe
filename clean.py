@@ -21,7 +21,7 @@ df = df[df["event_type"].isin(valid_event_types)]
 df = df[df["duration_seconds"] > 0]
 
 # Normalize timestamp
-df.loc[:, "timestamp"] = pd.to_datetime(df["timestamp"], format='mixed')
+df["timestamp"] = pd.to_datetime(df["timestamp"], format='mixed')
 df.loc[:, "timestamp"] = df["timestamp"].apply(lambda x: x.isoformat())
 
 # export as file
