@@ -6,6 +6,7 @@ weekday: the day-of-week name of the event's date, written in full (e.g., Monday
 
 import sys
 import pandas as pd
+from pathlib import Path
 
 in_path, out_path = sys.argv[1], sys.argv[2]
 
@@ -17,4 +18,5 @@ dt_date = pd.to_datetime(df["date"])
 df["weekday"] = dt_date.dt.day_name()
 
 # Write result to data/transformed/events.csv
+Path(out_path).parent.mkdir(parents=True, exist_ok=True)
 df.to_csv(out_path, index=False)

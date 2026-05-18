@@ -6,6 +6,7 @@ normalizes timestamp to ISO 8601 (that is, to the format YYYY-MM-DDTHH:MM:SS).
 
 import sys
 import pandas as pd
+from pathlib import Path
 
 # Reads data/raw/events.csv
 raw_path, out_path = sys.argv[1], sys.argv[2]
@@ -25,4 +26,5 @@ df["timestamp"] = pd.to_datetime(df["timestamp"], format='mixed')
 df.loc[:, "timestamp"] = df["timestamp"].apply(lambda x: x.isoformat())
 
 # export as file
+Path(out_path).parent.mkdir(parents=True, exist_ok=True)
 df.to_csv(out_path, index=False)
