@@ -22,7 +22,7 @@ df = df[df["event_type"].isin(valid_event_types)]
 
 # Keep only positive duration seconds (int)
 df = df[df["duration_seconds"] > 0]
-df.loc[:, "duration_seconds"] = df["duration_seconds"].astype(int)
+df["duration_seconds"] = df["duration_seconds"].astype(int)
 
 # Normalize timestamp
 df["timestamp"] = pd.to_datetime(df["timestamp"], format='mixed')
