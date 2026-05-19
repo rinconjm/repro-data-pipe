@@ -16,9 +16,11 @@ df = pd.read_csv(raw_path)
 # Drop rows with any missing fields, invalid event types, or non-positive duration seconds
 df = df.dropna(how="any")
 
-valid_event_types = ["click", "login", "scroll", "view", "buy", "purchase"]
+valid_event_types = ["click", "login", "purchase", "scroll", "view"]
 df = df[df["event_type"].isin(valid_event_types)]
 
+# Keep only positive duration seconds (int)
+df.loc[:, "duration_seconds"] = df["duration_seconds"].astype(int)
 df = df[df["duration_seconds"] > 0]
 
 # Normalize timestamp
