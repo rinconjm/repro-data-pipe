@@ -26,7 +26,8 @@ df["duration_seconds"] = df["duration_seconds"].astype(int)
 
 # Normalize timestamp
 df["timestamp"] = pd.to_datetime(df["timestamp"], format='mixed')
-df.loc[:, "timestamp"] = df["timestamp"].apply(lambda x: x.isoformat())
+df["timestamp"] = df["timestamp"].apply(lambda x: x.isoformat())
+df["timestamp"] = df["timestamp"].str[:19]
 
 # export as file
 Path(out_path).parent.mkdir(parents=True, exist_ok=True)
